@@ -1,5 +1,9 @@
 #####   ADD 10% DISCOUNT TO SALE VALUE   #####
 
+# Takes a spreadsheet and adds a discount to prices.
+# Saves the new price in a new column.
+# Create a Barchart
+
 import openpyxl as xl
 from openpyxl import BarChart, Reference
 
