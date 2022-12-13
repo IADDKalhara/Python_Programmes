@@ -1,2 +1,2 @@
 # Python_Programmes
-Python programmes I wrote during studying
+This repo contains Python programmes I wrote while learning
