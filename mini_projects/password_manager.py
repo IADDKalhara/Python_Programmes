@@ -35,16 +35,9 @@ def load_key():
 
 
 # Get master password from user and combine it with encryption key
+
 master_password = input("Enter Master Password: ")
-password = master_password.encode()
-salt = os.urandom(16)
-kdf = PBKDF2HMAC(
-    algorithm=hashes.SHA256(),
-    length=32,
-    salt=salt,
-    iterations=480000,
-)
-key = load_key() + base64.urlsafe_b64encode(kdf.derive(password))
+key = load_key() + master_password.encode()
 fer = Fernet(key)
 
 
