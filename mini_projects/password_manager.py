@@ -8,6 +8,14 @@ print("=====================================")
 print("         PASSWORD MANAGER            ")
 print("=====================================")
 
+# This is a one time use function
+# Generate a encrypt key and put it in a key file
+'''
+def write_key():
+    encrypt_key = Fernet.generate_key()
+    with open("key.key", "wb") as key_file:
+        key_file.write(encrypt_key)
+'''
 
 def add():
     name = input("Account name: ")
@@ -48,14 +56,7 @@ def view():
             user, pwd = line.split(",")
             print(f"Username: {user} | Password: {fer.decrypt(pwd.encode()).decode()}")
 
-# This is a one time use function
-# Generate a encrypt key and put it in a key file
-'''
-def write_key():
-    encrypt_key = Fernet.generate_key()
-    with open("key.key", "wb") as key_file:
-        key_file.write(encrypt_key)
-'''
+
 
 while True:
     choice = input("What do you want to do add / view or q to quit)? ").lower()
