@@ -1,3 +1,5 @@
+from cryptography.fernet import Fernet
+
 print("=====================================")
 print("         PASSWORD MANAGER            ")
 print("=====================================")
@@ -16,7 +18,9 @@ def view():
     with open("passwords.txt", "r") as f:
         # Read file line by line and print
         for line in f.readlines():
-            print(line.rstrip())
+            line = line.rstrip()
+            user, pwd = line.split(",")
+            print(f"Username:{user} | Password:{pwd}")
 
 master_password = input("Enter Master Password: ")
 
