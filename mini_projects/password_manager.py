@@ -22,6 +22,7 @@ def view():
             user, pwd = line.split(",")
             print(f"Username:{user} | Password:{pwd}")
 
+
 master_password = input("Enter Master Password: ")
 
 while True:
