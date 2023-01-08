@@ -1,95 +1,94 @@
 ####    Simple Calculator   ####
 
+history_list = []
+
+
 # Functions for arithmatic operations and output
-def add(a, b):
-    print(f"{a} + {b} = {a + b}")
-    return
+def add(a,b):
+  return a+b
+  
+def subtract(a,b):
+  return a-b
+  
+def multiply (a,b):
+  return a*b
 
-def subtract(a, b):
-    print(f"{a} - {b} = {a - b}")
-    return
-
-def multiply(a, b):
-    print(f"{a} * {b} = {a * b}")
-    return
-
-def divide(a, b):
-    try:
-        print(f"{a} / {b} = {a / b}")
-        return
-    except ZeroDivisionError:
-        print("float division by zero")
-        print(f"{a} / {b} = None")
-
-
-def power(a, b):
-    total = 0
-
-    for i in range(b + 1):
-        total += a * i
-    
-    print(f"{a} ^ {b} = {total}")
-    return
-
-def remainder(a, b):
-    print(f"{a} % {b} = {a % b}")
-    return
+def divide(a,b):
+  try:
+    return a/b
+  except Exception as e:
+    print(e)
+def power(a,b):
+  return a**b
+  
+def remainder(a,b):
+  return a%b
 
 
 def select_op(choice):
-    # End programme
-    if choice == "#":
-        return (-1)
-
-    while True:
-        try:
-            first_number = input("Enter first number: ")
-            print(first_number)
-            # Reset
-            if "$" in first_number:
-                break
-            # End programme
-            if "#" in first_number:
-                return (-1)
-
-            second_number = input("Enter second number: ")
-            print(second_number)
-            if "$" in second_number:
-                break
-            if "#" in second_number:
-                return (-1)
-
-            # Convert string inputs into numbers
-            first_number = float(first_number)
-            second_number = float(second_number)
-
-        except ValueError:  
-            print("Not a valid number,please enter again")
-
-        if choice == "+":
-            add(first_number, second_number)
-            break
-        elif choice == "-":
-            subtract(first_number - second_number)
-            break
-        elif choice == "*":
-            multiply(first_number, second_number)
-            break
-        elif choice == "/":
-            divide(first_number, second_number)
-            break
-        elif choice == "^":
-            power(first_number, second_number)
-            break
-        elif choice == "%":
-            remainder(first_number, second_number)
-            break
-        elif choice == "$":
-            break
-        else:
-            print("Unrecognized operation")
-            break
+  if (choice == '#'):
+    return -1
+  elif (choice == '$'):
+    return 0
+  elif (choice in ('+','-','*','/','^','%')):
+    while (True):
+      num1s = str(input("Enter first number: "))
+      print(num1s)
+      if num1s.endswith('$'):
+        return 0
+      if num1s.endswith('#'):
+        return -1
+        
+      try:
+        num1 = float(num1s)
+        break
+      except:
+        print("Not a valid number,please enter again")
+        continue
     
+    while (True):
+      num2s = str(input("Enter second number: "))
+      print(num2s)
+      if num2s.endswith('$'):
+        return 0
+      if num2s.endswith('#'):
+        return -1
+      try:  
+        num2 = float(num2s)
+        break
+      except:
+        print("Not a valid number,please enter again")
+        continue
+    
+    result = 0.0
+    last_calculation = ""
+    if choice == '+':
+      result = add(num1, num2)
+    elif choice == '-':
+      result = subtract(num1, num2)
+    elif choice == '*':
+      result = multiply(num1, num2)
+    elif choice == '/':
+      result =  divide(num1, num2)
+    elif choice == '^':
+      result = power(num1, num2)
+    elif choice == '%':
+      result = remainder(num1, num2)
+    else:
+      print("Something Went Wrong")
+      
+    last_calculation =  "{0} {1} {2} = {3}".format(num1, choice, num2, result) 
+    print(last_calculation )
+
+    history_list.append(last_calculation)
+
+  elif choice == '?':
+    if not history_list:
+      print("No past calculations to show")
+    else:
+      print(*history_list, sep="\n")
+  else:
+    print("Unrecognized operation")
 
 while True:
   print("Select operation.")
@@ -101,12 +100,12 @@ while True:
   print("6.Remainder: % ")
   print("7.Terminate: # ")
   print("8.Reset    : $ ")
+  print("8.History  : ? ")
   
-
   # take input from the user
-  choice = input("Enter choice(+,-,*,/,^,%,#,$): ")
+  choice = input("Enter choice(+,-,*,/,^,%,#,$,?): ")
   print(choice)
-
   if(select_op(choice) == -1):
+    #program ends here
     print("Done. Terminating")
     exit()
