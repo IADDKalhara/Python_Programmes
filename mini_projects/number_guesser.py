@@ -1,34 +1,23 @@
+# ==========================    Number Guesser  =================================
+# ===============================================================================
+# Computer guessing my number
+
 import random
 
-max_number = input("Enter maximum number: ")
-
-# Check if the entered number is valid
-if max_number.isdigit():
-    max_number = int(max_number)
-else:
-    print("Invalid!")
-    quit()
-
-# Generate random number
-random_number = random.randint(0, max_number)
-guesses = 0
+lowest = 0
+highest = int(input("Enter high number: "))
 
 while True:
-    number = input("Guess the number: ")
-    guesses += 1
+    number = random.randint(lowest, highest)
 
-    # Check if the number is valid
-    if number.isdigit():
-        number = int(number)
+    answer = input(f"Is the number {number} too high(H), too low(L) or correct(C)?").lower()
 
-        # Break loop when number is correct
-        if number == random_number:
-            print("Corect !!")
-            break
-        else:
-            continue
-    else:
-        print("Invalid number")
+    if answer == "c":
+        print(f"Guessed number {number} correctly !")
+        quit()
+    elif answer == "h":
+        highest = number
         continue
-
-print(f"You guessed {guesses} times")
+    elif answer == "l":
+        lowest = number
+        continue
