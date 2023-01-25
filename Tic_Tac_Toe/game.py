@@ -89,6 +89,8 @@ def play(game, x_player, o_player, print_game = True):
             if game.current_winner:
                 if print_game:
                     print(letter + " wins !!")
+                    print("Thanks for playing...!")
+                    print("")
                 return letter
             
             letter = 'O' if letter == 'X' else 'X'      # Switching player
@@ -98,9 +100,27 @@ def play(game, x_player, o_player, print_game = True):
 
     if print_game:
         print("It's a tie !! 🤨")
+        print("Thanks for playing. Good luck next time..!")
+        print("")
 
 if __name__ == '__main__':
+    # Get valid input and difficulty level from user
+    while True:
+        print("")
+        print("========= Tic_Tac_Toe Game =========")
+        print("1. Easy game")
+        print("2. Hard game")
+        choice = input("Enter choice: ")
+        if choice == '2':
+            o_player = Genius_computer('O')
+            break
+        elif choice == '1':
+            o_player = Computer_player('O')
+            break
+        else:
+            print("Invalid entry, try again")
+        continue
+
     x_player = Human_player('X')
-    o_player = Genius_computer('O')
     t = Tictactoe()
     play(t, x_player, o_player, print_game=True)
